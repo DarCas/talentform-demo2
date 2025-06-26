@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(FrontController::class)
@@ -14,6 +15,7 @@ Route::controller(FrontController::class)
 Route::controller(BackController::class)
     ->group(function () {
         Route::get('/backend', 'index');
+        Route::get('/backend/users', 'index');
 
         Route::get('/backend/delete/{id}', 'delete');
         Route::post('/backend/delete/{id}', 'deletePost');
@@ -26,4 +28,9 @@ Route::controller(BackController::class)
 
         Route::get('/backend/recupera-password', 'recuperaPassword');
         Route::post('/backend/recupera-password', 'recuperaPasswordPost');
+    });
+
+Route::controller(UsersController::class)
+    ->group(function () {
+        Route::get('/backend/users', 'index');
     });

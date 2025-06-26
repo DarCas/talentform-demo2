@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class User
- * 
+ *
  * @property string $fullname
  * @property int $id
  * @property string $usernm
@@ -35,4 +35,19 @@ class User extends Model
 		'passwd',
 		'insert_date'
 	];
+
+    /**
+     * Helper per modificare la data di ricezione nel formato desiderato
+     *
+     * @param string $format https://www.php.net/manual/en/datetime.format.php
+     * @return string
+     */
+    function formatInsertDate(string $format = 'd/m/Y H:i'): string
+    {
+        return $this->insert_date
+            // Correggiamo il timezone (fuso orario) della data con quello italiano
+            ->setTimezone('Europe/Rome')
+            // Stampiamo la data nel formato desiderato
+            ->format($format);
+    }
 }

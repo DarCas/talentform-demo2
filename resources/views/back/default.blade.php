@@ -24,10 +24,16 @@
 <header class="container bg-dark rounded shadow-lg mt-1 mb-5 px-3 py-3">
     <div class="row">
         <div class="col-6">
-            <a class="d-block mx-auto" href="https://casertano.name" target="_blank">
+            <a href="https://casertano.name" target="_blank">
                 <img src="https://gravatar.com/avatar/5b70cf3b9140485421b906e45f606648?s=50" alt=""
                      class="rounded">
             </a>
+            <div class="btn-group" role="group" aria-label="">
+                <a href="/backend"
+                   class="btn btn-secondary">Guestbook</a>
+                <a href="/backend/users"
+                   class="btn btn-secondary">Utenti</a>
+            </div>
         </div>
         <div class="col-6 text-end">
             @if($user)
@@ -38,7 +44,8 @@
                     </button>
                     <ul class="dropdown-menu bg-danger dropdown-menu-end shadow">
                         <li>
-                            <a class="dropdown-item bg-danger text-white" href="/backend/logout">Logout</a>
+                            <a class="dropdown-item bg-danger text-white"
+                               href="/backend/logout">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -47,7 +54,7 @@
     </div>
 </header>
 <main class="container">
-    @include('partials/form/errors', ['errors' => $errors])
+    @include('partials.form.errors', ['errors' => $errors])
 
     {!! $alertTemplate !!}
 
