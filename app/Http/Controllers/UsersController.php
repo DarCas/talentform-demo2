@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class UsersController extends Controller
 {
-    function index(Request $request)
+    /**
+     * Controller per la pagina Utenti di backend
+     *
+     * @param Request $request
+     * @return Response
+     */
+    function index(Request $request): Response
     {
         return $this->renderContent(
             content: $this->renderDatagrid($request),

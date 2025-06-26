@@ -15,7 +15,6 @@ Route::controller(FrontController::class)
 Route::controller(BackController::class)
     ->group(function () {
         Route::get('/backend', 'index');
-        Route::get('/backend/users', 'index');
 
         Route::get('/backend/delete/{id}', 'delete');
         Route::post('/backend/delete/{id}', 'deletePost');
@@ -33,4 +32,10 @@ Route::controller(BackController::class)
 Route::controller(UsersController::class)
     ->group(function () {
         Route::get('/backend/users', 'index');
+
+//        Route::get('/backend/users/delete/{id}', 'delete');
+//        Route::post('/backend/users/delete/{id}', 'deletePost');
+//
+//        Route::get('/backend/users/edit/{id}', 'edit');
+//        Route::post('/backend/users/edit/{id}', 'editPost');
     });
