@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class UsersController extends Controller
 {
@@ -12,10 +11,14 @@ class UsersController extends Controller
      * Controller per la pagina Utenti di backend
      *
      * @param Request $request
-     * @return Response
+     * @return mixed
      */
-    function index(Request $request): Response
+    function index(Request $request): mixed
     {
+        if (!$this->imLogged()) {
+            return redirect('/backend/');
+        }
+
         return $this->renderContent(
             content: $this->renderDatagrid($request),
             alertTemplate: $alertTemplate ?? null,

@@ -28,12 +28,14 @@
                 <img src="https://gravatar.com/avatar/5b70cf3b9140485421b906e45f606648?s=50" alt=""
                      class="rounded">
             </a>
-            <div class="btn-group" role="group" aria-label="">
-                <a href="/backend"
-                   class="btn btn-secondary">Guestbook</a>
-                <a href="/backend/users"
-                   class="btn btn-secondary">Utenti</a>
-            </div>
+            @if($user)
+                <div class="btn-group" role="group" aria-label="">
+                    <a href="/backend"
+                       class="btn btn-secondary">Guestbook</a>
+                    <a href="/backend/users"
+                       class="btn btn-secondary">Utenti</a>
+                </div>
+            @endif
         </div>
         <div class="col-6 text-end">
             @if($user)
