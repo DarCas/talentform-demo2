@@ -41,7 +41,7 @@ class FrontController extends Controller
          * imposto le variabili utilizzi al rendering del template.
          */
         $view = response()
-            ->view('default', [
+            ->view('front.default', [
                 'css' => [
                     "//cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css",
                     "//cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css",
@@ -158,7 +158,7 @@ class FrontController extends Controller
          * Renderizzo il template di blade "partials/form.blade.php"
          * passando i parametri utili alla renderizzazione.
          */
-        $tpl = view('partials.form', [
+        $tpl = view('front.partials.form', [
             'data' => Facades\Session::get('data'),
         ])->render();
 
@@ -198,7 +198,7 @@ class FrontController extends Controller
          */
         $pagination = $paginate->links()->toHtml();
 
-        return view('partials.guestbook', [
+        return view('front.partials.guestbook', [
             'items' => $paginate->items(),
             'pagination' => $pagination,
         ])->render();
