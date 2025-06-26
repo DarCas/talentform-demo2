@@ -5,10 +5,18 @@
  */
 
 /**
- * Ordinamenti DESC di default
+ * Ordinamento ASC/DESC per colonna ID di default
  */
 $idDesc = false;
+
+/**
+ * Ordinamento ASC/DESC per colonna Fullname di default
+ */
 $fullnameDesc = false;
+
+/**
+ * Ordinamento ASC/DESC per colonna Data Ricezione di default
+ */
 $dataRicezioneDesc = false;
 
 if (!request()->query->has('sort')) {
@@ -52,25 +60,19 @@ if (request()->query('sort') === 'data_ricezione') {
             <a href="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'id', 'desc' => $idDesc]) }}"
                class="text-white">#</a>
 
-            @if(request()->query('sort') === 'id')
-                @if (!$idDesc)
-                    <i class="bi bi-caret-down-fill"></i>
-                @else
-                    <i class="bi bi-caret-up-fill"></i>
-                @endif
-            @endif
+            <x-sort-icon
+                column="id"
+                :desc="$idDesc"
+            />
         </th>
         <th scope="col">
             <a href="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'fullname', 'desc' => $fullnameDesc]) }}"
                class="text-white">Cognome, Nome</a>
 
-            @if(request()->query('sort') === 'fullname')
-                @if (!$fullnameDesc)
-                    <i class="bi bi-caret-down-fill"></i>
-                @else
-                    <i class="bi bi-caret-up-fill"></i>
-                @endif
-            @endif
+            <x-sort-icon
+                column="fullname"
+                :desc="$fullnameDesc"
+            />
         </th>
         <th scope="col">E-mail</th>
         <th scope="col">Messaggio</th>
@@ -78,13 +80,10 @@ if (request()->query('sort') === 'data_ricezione') {
             <a href="{{ request()->fullUrlWithQuery(['page' => 1, 'sort' => 'data_ricezione', 'desc' => $dataRicezioneDesc]) }}"
                class="text-white">Data inserimento</a>
 
-            @if(request()->query('sort') === 'data_ricezione')
-                @if (!$dataRicezioneDesc)
-                    <i class="bi bi-caret-down-fill"></i>
-                @else
-                    <i class="bi bi-caret-up-fill"></i>
-                @endif
-            @endif
+            <x-sort-icon
+                column="data_ricezione"
+                :desc="$dataRicezioneDesc"
+            />
         </th>
         <th colspan="2" scope="col" style="width: 110px">&nbsp;</th>
     </tr>

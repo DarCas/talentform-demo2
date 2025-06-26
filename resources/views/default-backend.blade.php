@@ -21,17 +21,17 @@
 </head>
 
 <body>
-<header class="container bg-dark rounded shadow-lg mt-1 mb-5 py-3">
+<header class="container bg-dark rounded shadow-lg mt-1 mb-5 px-3 py-3">
     <div class="row">
         <div class="col-6">
-            <a class="navbar-brand d-block mx-auto" href="https://casertano.name" target="_blank">
+            <a class="d-block mx-auto" href="https://casertano.name" target="_blank">
                 <img src="https://gravatar.com/avatar/5b70cf3b9140485421b906e45f606648?s=50" alt=""
-                     class="img-fluid rounded-circle">
+                     class="rounded">
             </a>
         </div>
         <div class="col-6 text-end">
             @if($user)
-                <div class="btn-group">
+                <div class="btn-group-lg">
                     <button type="button" class="btn btn-info dropdown-toggle"
                             data-bs-toggle="dropdown" aria-expanded="false">
                         {{ $user['fullname'] }}
