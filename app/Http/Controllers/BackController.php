@@ -443,9 +443,7 @@ class BackController extends Controller
             /**
              * Recupero i dati già impaginati da Laravel
              */
-            $paginate = $builder->paginate(
-                perPage: $perPage, // Definisco quanti messaggi voglio visualizzare per pagina
-            );
+            $paginate = $builder->paginate($perPage);
 
             /**
              * Contiene la navigazione della paginazione fatta in Bootstrap 5.
