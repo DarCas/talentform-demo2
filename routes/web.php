@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BackController;
+use App\Http\Controllers\BackupController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,19 @@ Route::controller(BackController::class)
 
         Route::get('/backend/recupera-password', 'recuperaPassword');
         Route::post('/backend/recupera-password', 'recuperaPasswordPost');
+    });
+
+Route::controller(BackupController::class)
+    ->group(function () {
+        Route::get('/backend/backup', 'index');
+
+        Route::post('/backend/backup/delete', 'deleteMultiple');
+
+        Route::get('/backend/backup/delete/{filename}', 'delete')
+            ->where('filename', '.*');
+
+        Route::get('/backend/backup/dwl/{filename}', 'dwl')
+            ->where('filename', '.*');
     });
 
 Route::controller(UsersController::class)

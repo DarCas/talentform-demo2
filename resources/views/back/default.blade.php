@@ -32,8 +32,12 @@
                 <div class="btn-group" role="group" aria-label="">
                     <a href="/backend"
                        class="btn btn-secondary">Guestbook</a>
+
                     <a href="/backend/users"
                        class="btn btn-secondary">Utenti</a>
+
+                    <a href="/backend/backup"
+                       class="btn btn-secondary">Backup</a>
                 </div>
             @endif
         </div>

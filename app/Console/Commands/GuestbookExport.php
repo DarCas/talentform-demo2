@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Form;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Esporto la tabella "form" in CSV
@@ -35,8 +36,15 @@ class GuestbookExport extends AbstractCommand
     {
         $this->clear();
 
+        $disk = Storage::disk('local');
+
+        if (!$disk->exists('guestbook')) {
+            $disk->makeDirectory('guestbook');
+        }
+
         $oDateTime = new \DateTime('now', new \DateTimeZone('Europe/Rome'));
-        $filepath = storage_path("app/private/guestbook_{$oDateTime->format('YmdHi')}.csv");
+
+        $filepath = storage_path("app/private/guestbook/{$oDateTime->format('YmdHi')}.csv");
 
         try {
             /**
