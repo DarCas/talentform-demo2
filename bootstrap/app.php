@@ -2,6 +2,7 @@
 
 use Dotenv\Dotenv;
 use Dotenv\Repository\RepositoryBuilder;
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -29,4 +30,18 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
-    })->create();
+    })
+    ->withSchedule(function (Schedule $schedule) {
+        $schedule->command('cache:clear')
+            ->cron('0 0 1-15 * *');
+
+        $schedule->command('view:clear')
+            ->cron('0 0 1-15 * *');
+
+        /**
+         * Questa riga serve ad aggiungere un'operazione schedulata al cronjob di Laravel
+         */
+        $schedule->command('guestbook:export --orderBy=data_ricezione --desc')
+            ->everyFiveMinutes(); // Corrisponde a ->cron('*/5 * * * *')
+    })
+    ->create();

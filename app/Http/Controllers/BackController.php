@@ -18,14 +18,14 @@ class BackController extends Controller
     /**
      * Controller per gestione pagina index di backend
      *
-     * @param Request $req
+     * @param Request $request
      * @return Response
      */
-    function index(Request $req): Response
+    function index(Request $request): Response
     {
-        if ($req->get('delete', false)) {
+        if ($request->get('delete', false)) {
             $alertTemplate = new AlertView('Messaggio cancellato con successo!');
-        } else if ($req->get('edit', false)) {
+        } else if ($request->get('edit', false)) {
             $alertTemplate = new AlertView('Messaggio modificato con successo!');
         } else if (Facades\Session::get('no-login', false)) {
             $alertTemplate = new AlertView(
@@ -44,7 +44,7 @@ class BackController extends Controller
         }
 
         if ($this->imLogged()) {
-            $content = $this->renderDatagrid($req);
+            $content = $this->renderDatagrid($request);
         } else {
             $content = $this->renderLogin();
         }
