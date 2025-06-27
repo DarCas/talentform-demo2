@@ -15,10 +15,6 @@ class UsersController extends Controller
      */
     function index(Request $request): mixed
     {
-        if (!$this->imLogged()) {
-            return redirect('/backend/');
-        }
-
         return $this->renderContent(
             content: $this->renderDatagrid($request),
             alertTemplate: $alertTemplate ?? null,

@@ -17,10 +17,6 @@ class BackupController extends Controller
      */
     function index(): mixed
     {
-        if (!$this->imLogged()) {
-            return redirect('/backend/');
-        }
-
         if (Session::has('deleted')) {
             $alertTemplate = new AlertView('File eliminato con successo!');
 
@@ -42,8 +38,19 @@ class BackupController extends Controller
      */
     function delete(string $filename): mixed
     {
+        /**
+         * Mi collego al driver "guestbook" dichiarato nel file
+         * ~/config/filesystems.php
+         */
         $disk = Storage::disk('guestbook');
+
+        /**
+         * Verifico se il file esiste
+         */
         if ($disk->exists($filename)) {
+            /**
+             * Cancello il file
+             */
             $disk->delete($filename);
 
             Session::put('deleted', true);
@@ -94,15 +101,18 @@ class BackupController extends Controller
             return response()
                 ->download($disk->path($filename));
 
-//            Questo è quello che avviene in Laravel per iniziare un download
-//            header('Content-Type: application/octet-stream');
-//            header('Content-Disposition: attachment; filename="' . $filename . '"');
-//            header('Content-Length: ' . $disk->size($filename));
-//            header('Expires: 0');
-//            header('Cache-Control: must-revalidate');
-//            header('Pragma: public');
-//
-//            return readfile($disk->path($filename));
+            /**
+             * Di seguito quello che avviene in background su Laravel quando
+             * eseguo la funzione "download" utilizzata sopra.
+             *
+             * header('Content-Type: application/octet-stream');
+             * header('Content-Disposition: attachment; filename="' . $filename . '"');
+             * header('Content-Length: ' . $disk->size($filename));
+             * header('Expires: 0');
+             * header('Cache-Control: must-revalidate');
+             * header('Pragma: public');
+             * return readfile($disk->path($filename));
+             */
         } else {
             return response()
                 ->noContent(404);
@@ -118,8 +128,13 @@ class BackupController extends Controller
     {
         $disk = Storage::disk('guestbook');
 
+        /**
+         * Trasformo l'array dei files in una collection di Laravel
+         */
         $items = collect($disk->files())
+            // Elimino tutti i file che non terminano con .csv
             ->filter(fn($file) => Str::endsWith($file, '.csv'))
+            // Modifico la collection con i dati già pronti alla visualizzazione
             ->map(function ($file) use ($disk) {
                 $oDateTime = \DateTime::createFromFormat('U', $disk->lastModified($file));
 
@@ -130,7 +145,9 @@ class BackupController extends Controller
                     'lastModified' => $oDateTime->format('d/m/Y H:i:s'),
                 ];
             })
+            // Ordino i dati per ultima modifica decrescente
             ->sortBy(fn($file) => $file['lastModified'], SORT_DESC, true)
+            // Converso la collection in un array
             ->values();
 
         return view('back.backup.datagrid', [
