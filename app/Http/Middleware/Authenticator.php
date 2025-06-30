@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\User;
+use App\Models\UsersLogin;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades;
@@ -37,6 +38,12 @@ class Authenticator
             // Se l'ID dell'utente esiste e l'hash del record è uguale a $hash
             // allora l'utente è autorizzato a continuare le operazioni.
             if (!is_null($user) && sha1(http_build_query($user->toArray())) === $hash) {
+                $user->latestLogin()
+                    ->updateOrCreate(
+                        [],
+                        ['last_login' => now()]
+                    );
+
                 return $next($request);
             }
         }

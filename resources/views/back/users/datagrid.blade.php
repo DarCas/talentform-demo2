@@ -85,13 +85,16 @@ if (request()->query('sort') === 'insert_date') {
                 :desc="$insertDateDesc"
             />
         </th>
+        <th class="text-end" scope="col">
+            Ultimo accesso
+        </th>
         <th colspan="2" scope="col" style="width: 110px">&nbsp;</th>
     </tr>
     </thead>
 
     <tfoot>
     <tr>
-        <td colspan="6" class="px-4 pt-4">
+        <td colspan="7" class="px-4 pt-4">
             <div class="row">
                 <div class="col-3">
                     <div class="btn-group">
@@ -132,6 +135,7 @@ if (request()->query('sort') === 'insert_date') {
             <td>{{ $row['fullname'] }}</td>
             <td>{{ $row['usernm'] }}</td>
             <td class="text-end">{{ $row->formatInsertDate('d/m/Y H:i:s') }}</td>
+            <td class="text-end">{{ $row->getLatestLoginDate() }}</td>
             <td style="width: 20px" class="text-center">
                 <a class="btn btn-sm btn-info"
                    href="/backend/users/edit/{{ $row['id'] }}"
