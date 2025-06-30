@@ -17,18 +17,18 @@ class FrontController extends Controller
     /**
      * Metodo collegato alla route "/"
      *
-     * @param Request $req
+     * @param Request $request
      *
      * @return Response
      */
-    function index(Request $req): Response
+    function index(Request $request): Response
     {
         /**
          * Se le operazioni di salvataggio e invio del form vanno a buon fine
          * invio in $_GET il parametro "success" valorizzato a "true" e stampo
          * un alert di Bootstrap
          */
-        if ($req->get('success', false)) {
+        if ($request->get('success', false)) {
             $alertTemplate = new AlertView(
                 message: 'Messaggio inviato con successo!',
                 type: AlertType::Success,
@@ -55,7 +55,7 @@ class FrontController extends Controller
                 'formTemplate' => $this->renderForm(),
                 'guestbookTemplate' => $this->renderGuestbook(),
                 'year' => $this->year,
-                'title' => $req->get('title', 'Guestbook'),
+                'title' => 'Guestbook',
             ]);
 
         /**
@@ -69,7 +69,7 @@ class FrontController extends Controller
          * un refresh della pagina dopo 5 secondi ricaricando la stessa pagina
          * ma senza valori di $_GET.
          */
-        if ($req->get('success', false)) {
+        if ($request->get('success', false)) {
             $view->withHeaders([
                 'Refresh' => '5; url=/',
             ]);
@@ -126,7 +126,7 @@ class FrontController extends Controller
         $form->cognome = $validator->getValue('cognome');
         $form->email = $validator->getValue('email');
         $form->messaggio = $validator->getValue('messaggio');
-        $form->save();
+        $form-> save();
 
         /**
          * Invio e-mail con Facades.

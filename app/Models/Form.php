@@ -38,6 +38,11 @@ class Form extends Model
         'data_ricezione'
     ];
 
+    function fullname(): string
+    {
+        return "{$this->cognome}, {$this->nome}";
+    }
+
     /**
      * Helper per modificare la data di ricezione nel formato desiderato
      *
