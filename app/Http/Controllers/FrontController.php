@@ -126,7 +126,7 @@ class FrontController extends Controller
         $form->cognome = $validator->getValue('cognome');
         $form->email = $validator->getValue('email');
         $form->messaggio = $validator->getValue('messaggio');
-        $form-> save();
+        $form->save();
 
         /**
          * Invio e-mail con Facades.

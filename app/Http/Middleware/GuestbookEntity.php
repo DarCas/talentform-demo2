@@ -19,6 +19,7 @@ class GuestbookEntity
              * @var \Illuminate\Database\Eloquent\Builder $builder
              */
             $builder = Form::where('id', $id);
+
             /**
              * @var Form | null $item
              */
