@@ -13,7 +13,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Str;
 
-class BackController extends Controller
+class GuestbookController extends Controller
 {
     /**
      * Controller per gestione pagina index di backend

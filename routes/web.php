@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackController;
+use App\Http\Controllers\GuestbookController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\UsersController;
@@ -14,7 +14,7 @@ Route::controller(FrontController::class)
         Route::post('/sendmail', 'sendmail');
     });
 
-Route::controller(BackController::class)
+Route::controller(GuestbookController::class)
     ->group(function () {
         Route::get('/backend', 'index');
 
